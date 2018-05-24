@@ -1,0 +1,15 @@
+<h2><%= @product["name"] %></h2>
+<h4>Price: <%= @product["formatted"]["price"] %></h4>
+<h4>Tax: <%= @product["formatted"]["tax"] %></h4>
+<h4>Total: <%= @product["formatted"]["total"] %></h4>
+<h4>Description: <%= @product["description"] %></h4>
+
+<% @product["images"].each do |image| %>
+  <img src="<%= image["url"] %>">
+<% end %>
+
+<h6>Supplier: <%= @product["supplier"]["name"] %></h6>
+
+
+<a href="/client/products/<%= @product['id'] %>/edit">Edit</a>
+<a href="/client/products/<%= @product['id'] %>" data-method="delete">Delete</a>

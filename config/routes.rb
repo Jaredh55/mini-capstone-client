@@ -7,6 +7,14 @@ Rails.application.routes.draw do
   delete "/logout" => "sessions#destroy"
 
   get '/' => 'client/products#index'
+
+  namespace :client do
+    get '/orders/new' => 'orders#new'
+    get '/orders/:id' => 'orders#show'
+    post '/orders' => 'orders#create'
+  end 
+
+
   namespace :client do
     get '/products' => 'products#index'
     get '/products/new' => 'products#new'

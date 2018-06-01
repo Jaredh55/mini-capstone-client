@@ -24,4 +24,10 @@ Rails.application.routes.draw do
     patch '/products/:id' => 'products#update'
     delete '/products/:id' => 'products#destroy'
   end
+
+  namespace :client do
+    get '/carted_products' => 'carted_products#index'
+    get '/carted_products/new' => 'carted_products#new'
+    post '/carted_products' => 'carted_products#create'
+  end
 end

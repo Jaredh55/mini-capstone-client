@@ -1,3 +1,36 @@
-<% @carted_products.each do |carted_product| %>
- <%= carted_product["product"] %>
+
+<h1>Shopping Cart: </h1>
+<% products = @carted_products.collect{|x| x["product"]} %>
+<% unique_products = products.uniq %>
+
+<% unique_products.each do |cp| %>
+  <h2><%= cp["name"] %></h2>
+  <h3> Unit price: <%= cp["total"] %></h3>
+  <h3> Quantity: <%= @carted_products.select{|x| x["product"]["name"] == cp["name"]}.count %></h3>
 <% end %>
+
+<h1> Total: 
+  <% @total = 0 %>
+  <% unique_products.each do |cp| %>
+  <% @total = @total + (cp["total"].to_f * @carted_products.select{|x| x["product"]["name"] == cp["name"]}.count) %>
+  <% end %>
+  <%= @total %>
+</h1>
+
+<% @carted_products.each do |carted_product| %>
+<p>
+  <%= carted_product["product"]["name"] %>
+  <%= carted_product["product"]["price"] %> x
+  <%= carted_product["quantity"] %>
+  <a href="/client/carted_products/<%=carted_product["id"] %>" data-method="delete"> Remove </a>
+</p>
+<% end %>
+
+<%= form_tag "/client/orders", method: :post do %>
+  <input type="submit" name="" value="Create Order" />
+<% end %>
+
+<a href="/client/orders" data-method="post">Create Order</a>
+
+
+
